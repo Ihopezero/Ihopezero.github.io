@@ -72,7 +72,7 @@
 <meta property="og:image" content="http://bmob-cdn-24907.b0.upaiyun.com/2019/04/19/38493044408ee2de8020e273c8f93c63.png">
 <meta property="og:image" content="http://bmob-cdn-24907.b0.upaiyun.com/2019/04/19/38493044408ee2de8020e273c8f93c63.png">
 <meta property="og:image" content="http://bmob-cdn-24907.b0.upaiyun.com/2019/04/19/72324737405c8cfd80572a6141e7b503.png">
-<meta property="og:updated_time" content="2019-10-05T13:45:08.115Z">
+<meta property="og:updated_time" content="2019-11-07T08:45:01.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈STL">
 <meta name="twitter:description" content="今天浅谈一下下STL。STL是指C++的标准模板库(Standard Template Library)。一个既好用又复杂的library。">
@@ -225,7 +225,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -247,7 +247,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">37</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">38</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -341,7 +341,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-05 21:45:08" itemprop="dateModified" datetime="2019-10-05T21:45:08+08:00">2019-10-05</time>
+                <time title="修改时间：2019-11-07 16:45:01" itemprop="dateModified" datetime="2019-11-07T16:45:01+08:00">2019-11-07</time>
               </span>
             
           
@@ -397,7 +397,6 @@
 <h1 id="unique函数"><a href="#unique函数" class="headerlink" title="unique函数"></a>unique函数</h1><p><strong>一个可以删除有序数组中的重复元素,在“algorithm”头文件里</strong><br><strong>unique的作用是“去掉”容器中相邻元素的重复元素（不一定要求数组有序），它会把重复的元素添加到容器末尾（所以数组大小并没有改变），而返回值是去重之后的尾地址，</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">unique</span><span class="params">(iterator it_1,iterator it_2)</span></span>;</span><br><span class="line"><span class="function">iterator <span class="title">unique</span><span class="params">(iterator it_1,iterator it_2,<span class="keyword">bool</span> MyFunc)</span></span>;</span><br><span class="line"><span class="comment">//第三个参数是指自定义两个元素相等的规则，类似sort函数</span></span><br><span class="line">如果想真实删除重复元素可以在调用完unique函数之后，调用erase(it_2,a.end());进行删除</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line">    a.push_back(<span class="number">1</span>);</span><br><span class="line">    a.push_back(<span class="number">1</span>);</span><br><span class="line">    a.push_back(<span class="number">13</span>);</span><br><span class="line">    a.push_back(<span class="number">13</span>);</span><br><span class="line">    a.push_back(<span class="number">5</span>);</span><br><span class="line">    a.push_back(<span class="number">6</span>);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it_1 = a.begin();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it_2 = a.end();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator new_end;</span><br><span class="line">    sort(it_1,it_2);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; a.size(); i++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;a[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    new_end = unique(it_1,it_2); <span class="comment">//注意unique的返回值</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"调用unique()的 a : "</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; a.size(); i++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;a[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    a.erase(new_end,it_2);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"删除重复元素后的 a : "</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; a.size(); i++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;a[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><img src="http://bmob-cdn-24907.b0.upaiyun.com/2019/04/19/72324737405c8cfd80572a6141e7b503.png" alt></p>
 <h1 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h1><p><strong>逆转元素</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reverse(start,end)</span><br><span class="line">reverse_copy(start,end,b)<span class="comment">//将逆转后的元素存入b数组中</span></span><br></pre></td></tr></table></figure></p>
-<p>好了，今天的总结就到这里吧…困了要休息了。</p>
 
     </div>
 
@@ -528,7 +527,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -541,7 +540,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

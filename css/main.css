@@ -155,7 +155,7 @@ body {
   height: 100%;
 }
 body {
-  background: url("https://source.unsplash.com/random/1600x900");
+  background: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572617353521&di=8a7275595c54d7c26dfa3e64e218f67c&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201401%2F11%2F145825zn1sxa8anrg11gt1.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
@@ -1213,7 +1213,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a44a93;
+  background: #ff572e;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
