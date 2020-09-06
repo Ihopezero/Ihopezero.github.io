@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+  <link rel="alternate" href="/atom.xml" title="EiffelZero's Blog" type="application/atom+xml">
+  <meta name="google-site-verification" content="2cLzOpk_24lQDLTDLmjvweAzV88ghMV-XlIu_T5ttsk">
+  <meta name="baidu-site-verification" content="nPNOoBnR7f">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="8088/8086微处理器8088/8086 CPU的特点 采用并行流水线工作方式————通过设置指令预取队列实现（CPU内部结构） 对内存空间实现分段管理————将内存分为4个段并设置地址段寄存器，以实现对1MB空间的寻址 （实模式存储器寻址） 支持协处理器  （工作模式）  8080/8086 CPU的两种工作模式 8088/8086可工作于两种模式下：· 最小模式· 最大模式  两种工作模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章 微处理器与总线">
+<meta property="og:url" content="https://ihopezero.github.io/2020/03/16/第二章-微处理器与总线/index.html">
+<meta property="og:site_name" content="EiffelZero&#39;s Blog">
+<meta property="og:description" content="8088/8086微处理器8088/8086 CPU的特点 采用并行流水线工作方式————通过设置指令预取队列实现（CPU内部结构） 对内存空间实现分段管理————将内存分为4个段并设置地址段寄存器，以实现对1MB空间的寻址 （实模式存储器寻址） 支持协处理器  （工作模式）  8080/8086 CPU的两种工作模式 8088/8086可工作于两种模式下：· 最小模式· 最大模式  两种工作模式">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-26T06:53:54.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二章 微处理器与总线">
+<meta name="twitter:description" content="8088/8086微处理器8088/8086 CPU的特点 采用并行流水线工作方式————通过设置指令预取队列实现（CPU内部结构） 对内存空间实现分段管理————将内存分为4个段并设置地址段寄存器，以实现对1MB空间的寻址 （实模式存储器寻址） 支持协处理器  （工作模式）  8080/8086 CPU的两种工作模式 8088/8086可工作于两种模式下：· 最小模式· 最大模式  两种工作模式">
+  <link rel="canonical" href="https://ihopezero.github.io/2020/03/16/第二章-微处理器与总线/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>第二章 微处理器与总线 | EiffelZero's Blog</title>
+  
+
+
+  <script pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?aeee2c8a87cd582712bbd75dc8048be8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a href="https://ihopezero.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">EiffelZero's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">30</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">57</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+     
+  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/16/第二章-微处理器与总线/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EiffelZero">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="EiffelZero's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">第二章 微处理器与总线
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-16 13:46:59" itemprop="dateCreated datePublished" datetime="2020-03-16T13:46:59+08:00">2020-03-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-26 14:53:54" itemprop="dateModified" datetime="2020-03-26T14:53:54+08:00">2020-03-26</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/16/第二章-微处理器与总线/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/16/第二章-微处理器与总线/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="8088-8086微处理器"><a href="#8088-8086微处理器" class="headerlink" title="8088/8086微处理器"></a>8088/8086微处理器</h1><h2 id="8088-8086-CPU的特点"><a href="#8088-8086-CPU的特点" class="headerlink" title="8088/8086 CPU的特点"></a>8088/8086 CPU的特点</h2><ul>
+<li>采用并行流水线工作方式————通过设置指令预取队列实现（CPU内部结构）</li>
+<li>对内存空间实现分段管理————将内存分为4个段并设置地址段寄存器，以实现对1MB空间的寻址 （实模式存储器寻址）</li>
+<li>支持协处理器  （工作模式）</li>
+</ul>
+<h2 id="8080-8086-CPU的两种工作模式"><a href="#8080-8086-CPU的两种工作模式" class="headerlink" title="8080/8086 CPU的两种工作模式"></a>8080/8086 CPU的两种工作模式</h2><ul>
+<li>8088/8086可工作于两种模式下：<br>· 最小模式<br>· 最大模式</li>
+</ul>
+<h3 id="两种工作模式的选择方式："><a href="#两种工作模式的选择方式：" class="headerlink" title="两种工作模式的选择方式："></a>两种工作模式的选择方式：</h3><ul>
+<li>8088是工作在最小还是最大模式由MN/MX引线的状态决定。<br>· MN/MX=0————最大模式<br>· MN/MX=1————最小模式</li>
+</ul>
+<h1 id="8080的主要引线及内部结构"><a href="#8080的主要引线及内部结构" class="headerlink" title="8080的主要引线及内部结构"></a>8080的主要引线及内部结构</h1><h2 id="1-8080-CPU最小模式下的主要引脚信号"><a href="#1-8080-CPU最小模式下的主要引脚信号" class="headerlink" title="1.8080 CPU最小模式下的主要引脚信号"></a>1.8080 CPU最小模式下的主要引脚信号</h2><ul>
+<li>8080最小模式下的主要引脚信号————4组<br>· 完成一次访问内存或接口所需要的主要信号<br>· 与外部同步控制信号<br>· 中断请求和响应信号<br>· 总线保持和响应信号</li>
+</ul>
+<h3 id="微处理器读取一条指令的控制过程"><a href="#微处理器读取一条指令的控制过程" class="headerlink" title="微处理器读取一条指令的控制过程"></a>微处理器读取一条指令的控制过程</h3><ol>
+<li><p>发出读取数据所在的目标地址   （地址信号）<br>· 内存储器单元地址<br>· I/O接口地址</p>
+</li>
+<li><p>发出读控制信号 （控制信号）</p>
+</li>
+<li>送出传输的数据 （数据信号）</li>
+</ol>
+<h3 id="8088-CPU-最小模式下的主要引脚信号"><a href="#8088-CPU-最小模式下的主要引脚信号" class="headerlink" title="8088 CPU 最小模式下的主要引脚信号"></a>8088 CPU 最小模式下的主要引脚信号</h3><ul>
+<li><p>主要控制信号<br>· #WR ：写信号；<br>· #RD ：读信号；<br>· <strong>IO/#M</strong> ：为“0”表示访问内存，为“1”表示访问接口；<br>· #DEN ：低电平有效时，允许进行读/写操作；<br>· #DT/#R ：数据收发器的传送方向控制；<br>· ALE ： 地址锁存信号；<br>· RESET ： 复位信号。 </p>
+</li>
+<li><p>READY信号  </p>
+</li>
+</ul>
+<ul>
+<li><p>中断请求和响应信号<br>· INTR： 可屏蔽中断请求输入端<br>· NMI：非屏蔽中断请求输入端<br>· INTA：中断响应输出端  </p>
+</li>
+<li><p>总线保持信号<br>· HOLD：总线保持请求信号输入端。当CPU以外的其他设备要求占用总线时，通过该引脚向CPU发出请求。<br>· HLDA：总线保持响应信号输出端。CPU对HOLD信号的响应信号。</p>
+</li>
+</ul>
+<h3 id="8088和8086CPU引线功能比较"><a href="#8088和8086CPU引线功能比较" class="headerlink" title="8088和8086CPU引线功能比较"></a>8088和8086CPU引线功能比较</h3><ul>
+<li>数据总线宽度不同<br>· 8088的外部总线宽度是8位，8086为16位。</li>
+<li>访问存储器和输入输出控制信号含义不同<br>· 8088————IO/M=0表示访问内存；<br>· 8086————IO/M=1表示访问内存。<br>+其他部分引线功能的区别。</li>
+</ul>
+<h2 id="2-8088内部结构"><a href="#2-8088内部结构" class="headerlink" title="2. 8088内部结构"></a>2. 8088内部结构</h2><h3 id="执行单元（EU）"><a href="#执行单元（EU）" class="headerlink" title="执行单元（EU）"></a>执行单元（EU）</h3><ul>
+<li><p>构成：<br>· 运算器<br>· 8个通用寄存器<br>· 1个标志寄存器<br>· EU部分控制电路</p>
+</li>
+<li><p>功能<br>· 指令译码<br>· 指令执行<br>· 暂存中间运算结果<br>· 保存运算结果特征</p>
+</li>
+</ul>
+<h3 id="总线接口单元（BIU）"><a href="#总线接口单元（BIU）" class="headerlink" title="总线接口单元（BIU）"></a>总线接口单元（BIU）</h3><ul>
+<li>功能：<br>· 从内存中取指令到指令预存队列 （并行流水线工作的基础）<br>· 负责与内存或输入/输出接口之间的数据传送<br>· 在执行转移程序时，BIU使指令预取队列复位，从指定的新地址取指令，并立即传给执行单元执行。</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ol>
+<li>指令预取队列的存在使EU和BIU两个部分可同时进行工作（实现指令的并行执行）</li>
+<li>提高了CPU的效率</li>
+<li>降低了对存储器存取速度的要求</li>
+</ol>
+<h1 id="8080内部寄存器"><a href="#8080内部寄存器" class="headerlink" title="8080内部寄存器"></a>8080内部寄存器</h1><h2 id="内部寄存器的类型"><a href="#内部寄存器的类型" class="headerlink" title="内部寄存器的类型"></a>内部寄存器的类型</h2><ul>
+<li>含14个16位寄存器，按功能可分为三类<br>· 8个通用寄存器<br>· 4个段寄存器<br>· 2个控制寄存器</li>
+</ul>
+<h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><ul>
+<li>数据寄存器<blockquote>
+<p>· AX：累加器</p>
+<blockquote>
+<p>所有I/O指令都通过AX与接口传送信息，中间运算结果也多放于AX中；</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>· BX:基址寄存器</p>
+<blockquote>
+<p>在间接寻址中用于存放基地址；</p>
+</blockquote>
+<p>· CX：计数寄存器</p>
+<blockquote>
+<p>用于在循环或串操作指令中存放计数值；</p>
+</blockquote>
+<p>· DX：数据寄存器</p>
+<blockquote>
+<p>在间接寻址的I/O指令中存放I/O端口地址；在32位乘除法运算时，存放高16位数。</p>
+<hr>
+<ul>
+<li>8088/8086含4个16位数据寄存器，它们又可分为8个8位寄存器,即:<br>· AX————&gt;AH,AL<br>· BX————&gt;BH,BL<br>· CX————&gt;CH,CL<br>· DX————&gt;DH,DL</li>
+</ul>
+<hr>
+<ul>
+<li>地址指针寄存器<br>· SP : 堆栈指针寄存器</li>
+</ul>
+<p>其内容为栈顶的偏移地址</p>
+</blockquote>
+<p>· BP : 基址指针寄存器</p>
+<blockquote>
+<p>常用于在访问内存时存放内存单元的偏移地址。</p>
+<hr>
+</blockquote>
+</blockquote>
+<ul>
+<li>变址寄存器<br>· SI: 源变址寄存器<br>· DI:目标变址寄存器<br>· 变址寄存器在指令中常用于存放数据在内存中的地址。</li>
+</ul>
+<hr>
+<ul>
+<li>BX与BP在应用上的区别<br>· 作为通用寄存器，二者均可用于存放数据；<br>· 作为基址寄存器，用BX表示所寻找的数据在数据段；用BP则表示数据在堆栈段。</li>
+</ul>
+<h3 id="控制寄存器"><a href="#控制寄存器" class="headerlink" title="控制寄存器"></a>控制寄存器</h3><ul>
+<li><p>状态标志位<br>· CF（Carry Flag）  进位标志位。加(减)法运算时，若最高位有进(借)位则CF=1<br>· OF（Overflow Flag）  溢出标志位。当算术运算的结果超出了有符号数的可表达范围时，OF=1<br>· ZF（Zero Flag）  零标志位。当运算结果为零时ZF=1<br>· SF（Sign Flag）  符号标志位。当运算结果的最高位为1时，SF=1<br>· PF（Parity Flag） 奇偶标志位。运算结果的低8位中“1”的个数为偶数时PF=1<br>· AF（Auxiliary Carry Flag）  辅助进位标志位。加(减)操作中，若Bit3向Bit4有进位(借位)，AF=1</p>
+</li>
+<li><p>控制标志位<br>· TF（Trap Flag）  陷阱标志位，也叫跟踪标志位。TF=1时，使CPU处于单步执行指令的工作方式。<br>· IF（Interrupt Enable Flag）中断允许标志位。IF=1使CPU可以响应可屏蔽中断请求。<br>· DF（Direction Flag）方向标志位。在数据串操作时确定操作的方向。</p>
+</li>
+</ul>
+<h3 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h3><ul>
+<li>作用<br>· 用于存放相应逻辑段的段基地址</li>
+<li><p>8086/8088内存中逻辑段的类型<br>· 代码段————&gt;存放指令代码<br>· 数据段————&gt;存放操作的数据<br>· 附加段————&gt;存放操作的数据<br>· 堆栈段————&gt;存放暂时不用但需保存的数据。</p>
+</li>
+<li><p>CS ： 代码段寄存器，存放代码段的段基地址。</p>
+</li>
+<li>DS ： 数据段寄存器 ，存放数据段的段基地址。</li>
+<li>ES ： 附加段寄存器，存放数据段的段基地址。</li>
+<li>SS ： 堆栈段寄存器， 存放堆栈段的段基地址</li>
+</ul>
+<h1 id="实模式下的存储器寻址"><a href="#实模式下的存储器寻址" class="headerlink" title="实模式下的存储器寻址"></a>实模式下的存储器寻址</h1><h2 id="内存储器管理思想"><a href="#内存储器管理思想" class="headerlink" title="内存储器管理思想"></a>内存储器管理思想</h2><ul>
+<li>8088 CPU是16位体系结构的微处理器</li>
+<li>可以同时处理（产生）16位二进制码（直接管理64K个内存单元）</li>
+<li>8088 CPU需要管理1MB内存（需要能够产生1M个地址编码）<br>如何实现？<strong>内存分段管理方式</strong><h3 id="内存单元的编址"><a href="#内存单元的编址" class="headerlink" title="内存单元的编址"></a>内存单元的编址</h3></li>
+<li>内存每个单元的地址在逻辑上都由两部分组成：<br>· 段（基）地址 ：指示存储单元在整个内存空间中处于哪个区域（段）<br>· 段内地址（相对地址/偏移地址） ：指示存储单元在段中的相对位置（与段中第1个单元的距离）</li>
+</ul>
+<h3 id="存储器的编址"><a href="#存储器的编址" class="headerlink" title="存储器的编址"></a>存储器的编址</h3><ul>
+<li>段基地址：<br>· 决定存储单元在内存中的位置</li>
+<li>相对地址（偏移地址）：<br>· 该存储单元相对段内第一个单元的距离</li>
+<li>逻辑段的起始地址称为段首<br>· 每个逻辑段内的第一个单元（由偏移地址的定义得：段首的偏移地址=<strong>0</strong>）</li>
+<li>物理地址：<br>· 内存单元在整个内存空间中的惟一地址</li>
+</ul>
+<h2 id="实地址模式下的存储器地址变换"><a href="#实地址模式下的存储器地址变换" class="headerlink" title="实地址模式下的存储器地址变换"></a>实地址模式下的存储器地址变换</h2><ul>
+<li>内存物理地址由段基地址和偏移地址组成<br><strong>物理地址=段基地址×16+偏移地址</strong></li>
+</ul>
+<h2 id="逻辑段与逻辑地址"><a href="#逻辑段与逻辑地址" class="headerlink" title="逻辑段与逻辑地址"></a>逻辑段与逻辑地址</h2><ul>
+<li><strong>内存的分段是逻辑分段，不是物理段</strong>。各个逻辑段在地址上可以不相连、可以部分重合，也可以完全重合。</li>
+<li>每个内存单元具有惟一物理地址，但可能具有多个逻辑地址。</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>一个内存单元可以同时处于两个逻辑段</li>
+<li>一个内存单元可以在不同的时刻属于相同（或不同）类型的段</li>
+<li>一个内存单元在同一时刻可以属于不同类型的段</li>
+</ol>
+<h2 id="堆栈及堆栈段的使用"><a href="#堆栈及堆栈段的使用" class="headerlink" title="堆栈及堆栈段的使用"></a>堆栈及堆栈段的使用</h2><ul>
+<li>堆栈：<br>· 内存中一个特殊区域，用于存放暂时不用或需要保护的数据。<br>· 常用于响应中断或子程序调用。</li>
+</ul>
+<h1 id="8080系统总线"><a href="#8080系统总线" class="headerlink" title="8080系统总线"></a>8080系统总线</h1><h2 id="总线时序"><a href="#总线时序" class="headerlink" title="总线时序"></a>总线时序</h2><ul>
+<li>CPU工作时序：<br>· CPU各引脚信号在时间上的关系</li>
+<li>总线周期：<br>·CPU完成一次访问内存（或接口）操作所需要的时间。<br>· 一个总线周期至少包括4个时钟周期。</li>
+</ul>
+<h2 id="总线的概念"><a href="#总线的概念" class="headerlink" title="总线的概念"></a>总线的概念</h2><ul>
+<li><p>总线：<br>· 是一组导线和相关的控制、驱动电路的集合。是计算机系统各部件之间传输地址、数据和控制信息的通道。<br>· 地址总线（AB）<br>· 数据总线（DB）<br>· 控制总线（CB）</p>
+</li>
+<li><p>总线按层次结构分类<br>· CPU总线<br>· 系统总线<br>· 外部总线</p>
+</li>
+</ul>
+<h2 id="总线结构"><a href="#总线结构" class="headerlink" title="总线结构"></a>总线结构</h2><ul>
+<li>单总线结构</li>
+<li>双总线结构<br>· 面向CPU的双总线结构<br>· 面向主存的双总线结构</li>
+<li>多总线结构</li>
+</ul>
+<h2 id="面向CPU的双总线结构"><a href="#面向CPU的双总线结构" class="headerlink" title="面向CPU的双总线结构"></a>面向CPU的双总线结构</h2><p>存储器与I/O接口间无直接通道<br>在单总线结构基础上增加一条CPU到存储器的高速总线</p>
+<h2 id="总线的基本功能"><a href="#总线的基本功能" class="headerlink" title="总线的基本功能"></a>总线的基本功能</h2><ul>
+<li>数据传送</li>
+<li>仲裁控制</li>
+<li>出错处理</li>
+<li>总线驱动</li>
+</ul>
+<h2 id="总线的主要性能指标"><a href="#总线的主要性能指标" class="headerlink" title="总线的主要性能指标"></a>总线的主要性能指标</h2><ul>
+<li><p><strong>总线带宽（B/S）：</strong><br>· 单位时间内总线上可传送的数据量<br>· 总线带宽=位宽*工作频率</p>
+</li>
+<li><p>总线位宽（bit）：<br>· 能同时传送的数据位数</p>
+</li>
+<li><p>总线的工作频率（MHz）<br>· 总线带宽=（位宽/8）*（工作频率/每个存取周期的时钟数）</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>EiffelZero</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://ihopezero.github.io/2020/03/16/第二章-微处理器与总线/" title="第二章 微处理器与总线">https://ihopezero.github.io/2020/03/16/第二章-微处理器与总线/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/03/15/3-15/" rel="next" title="3-15">
+                  <i class="fa fa-chevron-left"></i> 3-15
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/03/17/3-16/" rel="prev" title="3-16">
+                  3-16 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#8088-8086微处理器"><span class="nav-number">1.</span> <span class="nav-text">8088/8086微处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8088-8086-CPU的特点"><span class="nav-number">1.1.</span> <span class="nav-text">8088/8086 CPU的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8080-8086-CPU的两种工作模式"><span class="nav-number">1.2.</span> <span class="nav-text">8080/8086 CPU的两种工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两种工作模式的选择方式："><span class="nav-number">1.2.1.</span> <span class="nav-text">两种工作模式的选择方式：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8080的主要引线及内部结构"><span class="nav-number">2.</span> <span class="nav-text">8080的主要引线及内部结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8080-CPU最小模式下的主要引脚信号"><span class="nav-number">2.1.</span> <span class="nav-text">1.8080 CPU最小模式下的主要引脚信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微处理器读取一条指令的控制过程"><span class="nav-number">2.1.1.</span> <span class="nav-text">微处理器读取一条指令的控制过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8088-CPU-最小模式下的主要引脚信号"><span class="nav-number">2.1.2.</span> <span class="nav-text">8088 CPU 最小模式下的主要引脚信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8088和8086CPU引线功能比较"><span class="nav-number">2.1.3.</span> <span class="nav-text">8088和8086CPU引线功能比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8088内部结构"><span class="nav-number">2.2.</span> <span class="nav-text">2. 8088内部结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行单元（EU）"><span class="nav-number">2.2.1.</span> <span class="nav-text">执行单元（EU）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总线接口单元（BIU）"><span class="nav-number">2.2.2.</span> <span class="nav-text">总线接口单元（BIU）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">2.2.3.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8080内部寄存器"><span class="nav-number">3.</span> <span class="nav-text">8080内部寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内部寄存器的类型"><span class="nav-number">3.1.</span> <span class="nav-text">内部寄存器的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用寄存器"><span class="nav-number">3.1.1.</span> <span class="nav-text">通用寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制寄存器"><span class="nav-number">3.1.2.</span> <span class="nav-text">控制寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段寄存器"><span class="nav-number">3.1.3.</span> <span class="nav-text">段寄存器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实模式下的存储器寻址"><span class="nav-number">4.</span> <span class="nav-text">实模式下的存储器寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存储器管理思想"><span class="nav-number">4.1.</span> <span class="nav-text">内存储器管理思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存单元的编址"><span class="nav-number">4.1.1.</span> <span class="nav-text">内存单元的编址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的编址"><span class="nav-number">4.1.2.</span> <span class="nav-text">存储器的编址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实地址模式下的存储器地址变换"><span class="nav-number">4.2.</span> <span class="nav-text">实地址模式下的存储器地址变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑段与逻辑地址"><span class="nav-number">4.3.</span> <span class="nav-text">逻辑段与逻辑地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆栈及堆栈段的使用"><span class="nav-number">4.4.</span> <span class="nav-text">堆栈及堆栈段的使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8080系统总线"><span class="nav-number">5.</span> <span class="nav-text">8080系统总线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总线时序"><span class="nav-number">5.1.</span> <span class="nav-text">总线时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总线的概念"><span class="nav-number">5.2.</span> <span class="nav-text">总线的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总线结构"><span class="nav-number">5.3.</span> <span class="nav-text">总线结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向CPU的双总线结构"><span class="nav-number">5.4.</span> <span class="nav-text">面向CPU的双总线结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总线的基本功能"><span class="nav-number">5.5.</span> <span class="nav-text">总线的基本功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总线的主要性能指标"><span class="nav-number">5.6.</span> <span class="nav-text">总线的主要性能指标</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" src="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658" alt="EiffelZero">
+  <p class="site-author-name" itemprop="name">EiffelZero</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://ihopezero.github.io/" title="GitHub &rarr; https://ihopezero.github.io/"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+      <div id="music163player">
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28411569&auto=0&height=66"></iframe>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-EiffelZero"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EiffelZero</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="150" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var id = element.id || '';
+    var src = element.src || '';
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (id !=='') {
+      script.id = element.id;
+    }
+    if (src !== '') {
+      script.src = src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'H60Gb4WjaEDHsrlOCmAoQR5J-gzGzoHsz',
+    appKey: 'yHCg1XnBAcRDVN3htrerxUm2',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

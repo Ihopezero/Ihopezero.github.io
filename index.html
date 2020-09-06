@@ -215,7 +215,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">30</span></a>
 
   </li>
       
@@ -237,7 +237,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">41</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">57</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -292,7 +292,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/11/27/Codeforces-Round-570-Div-3/">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/26/第三章-指令系统概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="EiffelZero">
@@ -306,7 +306,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/11/27/Codeforces-Round-570-Div-3/" class="post-title-link" itemprop="url">Codeforces Round #570 (Div. 3)</a>
+            <a href="/2020/03/26/第三章-指令系统概述/" class="post-title-link" itemprop="url">第三章-指令系统概述</a>
           
         </h1>
 
@@ -321,7 +321,726 @@
                 
               
 
-              <time title="创建时间：2019-11-27 21:15:54" itemprop="dateCreated datePublished" datetime="2019-11-27T21:15:54+08:00">2019-11-27</time>
+              <time title="创建时间：2020-03-26 16:41:39 / 修改时间：17:48:14" itemprop="dateCreated datePublished" datetime="2020-03-26T16:41:39+08:00">2020-03-26</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/26/第三章-指令系统概述/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/26/第三章-指令系统概述/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="指令系统基本概念"><a href="#指令系统基本概念" class="headerlink" title="指令系统基本概念"></a>指令系统基本概念</h1><h2 id="1-指令与指令系统"><a href="#1-指令与指令系统" class="headerlink" title="1.指令与指令系统"></a>1.指令与指令系统</h2><ul>
+<li><p>指令：控制计算机完成某种操作的命令</p>
+</li>
+<li><p>指令系统： 处理器所能识别的所有指令的集合</p>
+</li>
+<li><p>指令的兼容性：同一系列机的指令都是兼容的。</p>
+</li>
+<li><p>一条指令应包含的信息：</p>
+<ul>
+<li><p>运算数据的来源</p>
+</li>
+<li><p>运算结果的去向</p>
+</li>
+<li><p>执行的操作</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-指令格式"><a href="#2-指令格式" class="headerlink" title="2. 指令格式"></a>2. 指令格式</h2><p><strong>操作码       [操作数]（目标操作数），[操作数]（源操作数）</strong></p>
+<p>操作码：执行何种操作</p>
+<p>操作数：指令执行的对象（参加操作的数据或数据存放的地址）</p>
+<ul>
+<li>零操作数指令： 操作码</li>
+<li>单操作数指令： 操作码 操作数</li>
+<li>双操作数指令： 操作码 操作数，操作数</li>
+<li>多操作数指令： 三操作数及以上</li>
+</ul>
+<h2 id="3-指令中的操作数"><a href="#3-指令中的操作数" class="headerlink" title="3. 指令中的操作数"></a>3. 指令中的操作数</h2><h3 id="立即数操作数"><a href="#立即数操作数" class="headerlink" title="立即数操作数"></a>立即数操作数</h3><ul>
+<li><p>立即数本身是参加操作的数据，可以是8位或16位，<strong>只能</strong>作为<strong>源操作数</strong>。</p>
+</li>
+<li><p>立即数无法作为目标操作数</p>
+</li>
+<li>立即数可以是无符号或带符号数，数值符合其取值范围</li>
+</ul>
+<h3 id="寄存器操作数"><a href="#寄存器操作数" class="headerlink" title="寄存器操作数"></a>寄存器操作数</h3><ul>
+<li><p>参加运算的数存放在指令给出的寄存器中，可以是16位或8位。</p>
+</li>
+<li><p>表现形式：[（操作数在内存中的偏移地址） ]</p>
+</li>
+</ul>
+<h3 id="存储器操作数"><a href="#存储器操作数" class="headerlink" title="存储器操作数"></a>存储器操作数</h3><ul>
+<li>参加运算的数存放在存储器的某一个或某两个单元中</li>
+</ul>
+<h3 id="三种类型操作数的比较"><a href="#三种类型操作数的比较" class="headerlink" title="三种类型操作数的比较"></a>三种类型操作数的比较</h3><ul>
+<li>立即数：<ul>
+<li>由指令直接给出，是常数性质</li>
+<li>无地址含义，只表示运算的数据</li>
+</ul>
+</li>
+<li>寄存器操作数<ul>
+<li>表示运算的数据存放在寄存器中</li>
+<li>多数情况下，寄存器操作数指通用寄存器</li>
+<li>在三类操作数中所需运行时间最短</li>
+</ul>
+</li>
+<li>存储器操作数<ul>
+<li>表示运算的数据存放在内存</li>
+<li>指令中“[ ]”里是数据所在单元的偏移地址</li>
+<li>在三类操作数中所需运行时间最长。<br>不能作为目标操作数</li>
+</ul>
+</li>
+</ul>
+<h1 id="指令的寻址方式"><a href="#指令的寻址方式" class="headerlink" title="指令的寻址方式"></a>指令的寻址方式</h1><h2 id="1-直接寻址"><a href="#1-直接寻址" class="headerlink" title="1. 直接寻址"></a>1. 直接寻址</h2><p>指令中直接给出操作数的偏移地址</p>
+<p>例：</p>
+<ul>
+<li>MOV AX，[1200H]</li>
+</ul>
+<p>直接寻址方式下，操作数默认为在数据段，但允许段重设，即由指令给出所在逻辑段。</p>
+<p>例：（ES：段重设符）</p>
+<ul>
+<li>MOV AX，ES：[1200H]  </li>
+</ul>
+<h2 id="2-寄存器间接寻址"><a href="#2-寄存器间接寻址" class="headerlink" title="2. 寄存器间接寻址"></a>2. 寄存器间接寻址</h2><ul>
+<li>操作数存放在内存中，数据在内存中的偏移地址为方括号中通用寄存器的内容。</li>
+<li>仅有4个通用寄存器可用于存放数据的偏移地址  ————<strong>间址寄存器：（BX，BP，SI，DI）</strong></li>
+<li>间接寻址的一般格式：[ 间址寄存器 ]</li>
+</ul>
+<p>例：</p>
+<ul>
+<li>MOV BX，1200H</li>
+<li>MOV AX，[BX]</li>
+</ul>
+<p>操作数的段地址（数据处于哪个段）取决于选择哪一个间址寄存器：</p>
+<ul>
+<li>BX，SI，DI——————默认在数据段</li>
+<li>BP   —————————默认在堆栈段</li>
+</ul>
+<h2 id="3-寄存器相对寻址"><a href="#3-寄存器相对寻址" class="headerlink" title="3. 寄存器相对寻址"></a>3. 寄存器相对寻址</h2><p>操作数的偏移地址为寄存器的内容加上一个位移量。</p>
+<p>例：DATA是任意8bit或16bit常数</p>
+<ul>
+<li>MOV AX，[BX+DATA]</li>
+</ul>
+<p>相对寻址主要用于一维数组的操作</p>
+<p>常将位移量作为“表头”地址，间址寄存器的值作为表内相对地址</p>
+<h2 id="4-基址、变址寻址"><a href="#4-基址、变址寻址" class="headerlink" title="4. 基址、变址寻址"></a>4. 基址、变址寻址</h2><p>操作数的偏移地址为</p>
+<ul>
+<li>一个基址寄存器的内容 + 一个变址寄存器的内容；</li>
+</ul>
+<p>操作数的段地址由选择的基址寄存器决定</p>
+<ul>
+<li>基址寄存器为BX，默认在数据段</li>
+<li>基址寄存器为BP，默认在堆栈段</li>
+<li>基址变址寻址方式与相对寻址方式一样，主要用于一维数组操作。</li>
+</ul>
+<h2 id="5-基址、变址、相对寻址"><a href="#5-基址、变址、相对寻址" class="headerlink" title="5. 基址、变址、相对寻址"></a>5. 基址、变址、相对寻址</h2><ul>
+<li>操作数的偏移地址为：<ul>
+<li>基址寄存器内容+变址寄存器内容+位移量</li>
+</ul>
+</li>
+<li>操作数的段地址由选择的基址寄存器决定。</li>
+<li>基址变址相对寻址方式主要用于二维表格操作。</li>
+</ul>
+<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><ul>
+<li>寻址方式表示指令运算对象的来源和运算结果的去向</li>
+<li>注意点：<ul>
+<li>立即寻址仅针对源操作数</li>
+<li>寄存器寻址表示指令运算的数据在寄存器中（常为通用寄存器）</li>
+<li>存储器寻址表示指令运算的对象在内存中<ul>
+<li>数据在内存中的偏移地址在[ ]中，段地址可以默认或重设</li>
+</ul>
+</li>
+<li>存储器寻址和寄存器寻址均可用于源或目标操作数</li>
+</ul>
+</li>
+</ul>
+<h1 id="数据传送指令"><a href="#数据传送指令" class="headerlink" title="数据传送指令"></a>数据传送指令</h1><h2 id="一、通用数据传送指令"><a href="#一、通用数据传送指令" class="headerlink" title="一、通用数据传送指令"></a>一、通用数据传送指令</h2><h3 id="1-一般数据传送指令"><a href="#1-一般数据传送指令" class="headerlink" title="1. 一般数据传送指令"></a>1. 一般数据传送指令</h3><ul>
+<li>一般数据传送指令 MOV<ul>
+<li>格式：<ul>
+<li>MOV dest，src</li>
+</ul>
+</li>
+<li>操作：<ul>
+<li>src——&gt;dest</li>
+</ul>
+</li>
+<li>例：<ul>
+<li>MOV AL，BL</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注意点：<ul>
+<li>两操作数字长必须相同；</li>
+<li>两操作数不允许同时为存储器操作数；</li>
+<li>两操作数不允许同时为段寄存器；</li>
+<li>在源操作数是立即数时，目标操作数不能是段寄存器；</li>
+<li>IP和CS不作为目标操作数，FLAGS一般也不作为操作数在指令中出现。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-堆栈操作指令"><a href="#2-堆栈操作指令" class="headerlink" title="2. 堆栈操作指令"></a>2. 堆栈操作指令</h3><ul>
+<li><p>堆栈操作的原则</p>
+<ul>
+<li>先进后出</li>
+<li>以字为单位</li>
+</ul>
+</li>
+<li><p>堆栈操作指令：</p>
+<ul>
+<li>压栈指令<ul>
+<li>格式: PUSH OPRD</li>
+<li>指令执行过程：<ul>
+<li>SP - 2 → SP</li>
+<li>操作数高字节 → SP+1</li>
+<li>操作数低字节 → SP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>出栈指令<ul>
+<li>格式: POP OPRD</li>
+<li>指令执行过程：<ul>
+<li>SP→ 操作数低字节</li>
+<li>SP+1→ 操作数高字节</li>
+<li>SP←SP+2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>堆栈操作指令说明</p>
+<ul>
+<li>指令的操作数必须是16位；</li>
+<li>操作数可以是寄存器或存储器两单元，但不能是立即数；</li>
+<li>不能从栈顶弹出一个字给CS；</li>
+<li>PUSH和POP指令在程序中一般成对出现；</li>
+<li>PUSH指令的操作方向是从高地址向低地址，而POP指令的操作正好相反。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-交换指令"><a href="#3-交换指令" class="headerlink" title="3. 交换指令"></a>3. 交换指令</h3><ul>
+<li>格式：<ul>
+<li>XCHG REG，MEM/REG</li>
+</ul>
+</li>
+<li>注：<ul>
+<li>两操作数必须有一个是寄存器操作数</li>
+<li>不允许使用段寄存器。</li>
+</ul>
+</li>
+<li>例：<ul>
+<li>XCHG AX，BX</li>
+<li>XCHG [2000]，CL</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-查表指令"><a href="#4-查表指令" class="headerlink" title="4. 查表指令"></a>4. 查表指令</h3><ul>
+<li>格式：<ul>
+<li>XLAT</li>
+</ul>
+</li>
+<li>说明：<ul>
+<li>用BX的内容代表表格首地址，AL内容为表内位移量，BX+AL得到要查找元素的偏移地址</li>
+</ul>
+</li>
+<li>操作：<ul>
+<li>将BX+AL所指单元的内容送AL</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-字位扩展指令"><a href="#5-字位扩展指令" class="headerlink" title="5. 字位扩展指令"></a>5. 字位扩展指令</h3><ul>
+<li><p>将符号数的符号位扩展到高位；</p>
+</li>
+<li><p>指令为零操作数指令，采用隐含寻址，隐含的操作数为AX及AX，DX</p>
+</li>
+<li><p>无符号数的扩展规则为在高位补0</p>
+<h4 id="字节到字的扩展指令"><a href="#字节到字的扩展指令" class="headerlink" title="字节到字的扩展指令"></a>字节到字的扩展指令</h4><ul>
+<li>格式：<ul>
+<li>CBW</li>
+</ul>
+</li>
+<li>操作：<ul>
+<li>将AL内容扩展到AX</li>
+</ul>
+</li>
+<li>规则：<ul>
+<li>若最高位=1，则执行后AH=FFH</li>
+<li>若最高位=0，则执行后AH=00H</li>
+</ul>
+</li>
+</ul>
+<h4 id="字到双字的扩展指令"><a href="#字到双字的扩展指令" class="headerlink" title="字到双字的扩展指令"></a>字到双字的扩展指令</h4><ul>
+<li>格式：<ul>
+<li>CWD</li>
+</ul>
+</li>
+<li>操作：<ul>
+<li>将AX内容扩展到DX AX</li>
+</ul>
+</li>
+<li>规则：<ul>
+<li>若最高位=1，则执行后DX=FFFFH</li>
+<li>若最高位=0，则执行后DX=0000H</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、地址传送指令"><a href="#二、地址传送指令" class="headerlink" title="二、地址传送指令"></a>二、地址传送指令</h2><h3 id="1-LEA指令"><a href="#1-LEA指令" class="headerlink" title="1. LEA指令"></a>1. LEA指令</h3><ul>
+<li>操作：<ul>
+<li>将变量的16位偏移地址写入到目标寄存器</li>
+<li>当程序中用符号表示内存偏移地址时，须使用该指令。</li>
+</ul>
+</li>
+<li>格式：<ul>
+<li>LEA REG，MEM</li>
+</ul>
+</li>
+<li><p>指令要求：</p>
+<ul>
+<li>源操作数<strong>必须</strong>是一个存储器操作数，目标操作数通常是间址寄存器。</li>
+</ul>
+</li>
+<li><p>LEA指令与MOV指令执行结果对比</p>
+<ul>
+<li>MOV指令读取指定内存单元的<strong>内容</strong></li>
+<li>LEA指令读取指定内存单元的<strong>偏移地址</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-LDS、LES指令"><a href="#2-LDS、LES指令" class="headerlink" title="2. LDS、LES指令"></a>2. LDS、LES指令</h3><ul>
+<li>LDS和LES均用于将一个32位的远地址指针写入到目标寄存器。</li>
+<li>LDS（Load pointer using DS）的一般格式：<ul>
+<li>LDS 通用寄存器，存储器操作数     (将源操作数的偏移地址送目标寄存器，将源操作数的段地址送<strong>DS</strong>)</li>
+</ul>
+</li>
+<li>LES（Load pointer using ES）的一般格式：<ul>
+<li>LES 通用寄存器，存储器操作数    (将源操作数的偏移地址送目标寄存器，将源操作数的段地址送<strong>ES</strong>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、标志传送指令"><a href="#三、标志传送指令" class="headerlink" title="三、标志传送指令"></a>三、标志传送指令</h2><ul>
+<li><p>标志传送指令</p>
+<ul>
+<li>隐含操作数AH：<ul>
+<li>LAHF（Load AH from Flags）</li>
+<li>SAHF（Store AH into Flags）</li>
+<li>SAHF执行与LAHF相反的操作</li>
+<li>操作：将FLAGS的低8位装入AH</li>
+</ul>
+</li>
+<li>隐含操作数FLAGS：<ul>
+<li>PUSHF（Push flags onto stack）</li>
+<li>POPF（Pop flags off stack）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、输入输出指令"><a href="#四、输入输出指令" class="headerlink" title="四、输入输出指令"></a>四、输入输出指令</h2><h3 id="输入输出指令"><a href="#输入输出指令" class="headerlink" title="输入输出指令"></a>输入输出指令</h3><ul>
+<li>专门面向I/O端口操作的指令</li>
+<li>端口地址在指令中的表示方式</li>
+<li>指令功能：<ul>
+<li>从端口地址读入数据到累加器/将累加器的值输出到端口中</li>
+</ul>
+</li>
+<li>指令格式：<ul>
+<li>输入指令： IN acc，PORT</li>
+<li>输出指令 ：OUT PORT，acc</li>
+</ul>
+</li>
+</ul>
+<h3 id="指令寻址方式"><a href="#指令寻址方式" class="headerlink" title="指令寻址方式"></a>指令寻址方式</h3><ul>
+<li>根据端口地址码的长度，指令具有两种不同的端口地址表现形式。</li>
+<li>直接寻址<ul>
+<li>端口地址为8位时，指令中直接给出8位端口地址；</li>
+<li>寻址256个端口。</li>
+</ul>
+</li>
+<li>间接寻址<ul>
+<li>端口地址为16位时，指令中的端口地址必须由DX指定；</li>
+<li>可寻址64K个端口。</li>
+</ul>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+  
+
+    
+       
+  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/18/3-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EiffelZero">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="EiffelZero's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/03/18/3-18/" class="post-title-link" itemprop="url">3-18</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-18 19:58:34 / 修改时间：21:45:38" itemprop="dateCreated datePublished" datetime="2020-03-18T19:58:34+08:00">2020-03-18</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/18/3-18/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/18/3-18/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[蓝桥杯2018初赛]第几个幸运数<br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/03/18/3-18/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+  
+
+    
+       
+  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/17/3-17/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EiffelZero">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="EiffelZero's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/03/17/3-17/" class="post-title-link" itemprop="url">3-17</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-17 16:22:07 / 修改时间：19:57:06" itemprop="dateCreated datePublished" datetime="2020-03-17T16:22:07+08:00">2020-03-17</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/17/3-17/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/17/3-17/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> [蓝桥杯2017初赛]日期问题<br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/03/17/3-17/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+  
+
+    
+       
+  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/17/3-16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EiffelZero">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="EiffelZero's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/03/17/3-16/" class="post-title-link" itemprop="url">3-16</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-17 00:09:08 / 修改时间：00:59:47" itemprop="dateCreated datePublished" datetime="2020-03-17T00:09:08+08:00">2020-03-17</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/17/3-16/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/17/3-16/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[蓝桥杯2017初赛]分巧克力<br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/03/17/3-16/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+  
+
+    
+       
+  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/16/第二章-微处理器与总线/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EiffelZero">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="EiffelZero's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/03/16/第二章-微处理器与总线/" class="post-title-link" itemprop="url">第二章 微处理器与总线</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-16 13:46:59" itemprop="dateCreated datePublished" datetime="2020-03-16T13:46:59+08:00">2020-03-16</time>
             </span>
           
             
@@ -332,7 +1051,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-28 12:41:52" itemprop="dateModified" datetime="2019-11-28T12:41:52+08:00">2019-11-28</time>
+                <time title="修改时间：2020-03-26 14:53:54" itemprop="dateModified" datetime="2020-03-26T14:53:54+08:00">2020-03-26</time>
               </span>
             
           
@@ -348,7 +1067,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/27/Codeforces-Round-570-Div-3/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/27/Codeforces-Round-570-Div-3/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2020/03/16/第二章-微处理器与总线/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/16/第二章-微处理器与总线/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -362,11 +1081,386 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://codeforces.com/contest/1183" target="_blank" rel="noopener">Codeforces Round #570 (Div. 3)</a><br>
+          <h1 id="8088-8086微处理器"><a href="#8088-8086微处理器" class="headerlink" title="8088/8086微处理器"></a>8088/8086微处理器</h1><h2 id="8088-8086-CPU的特点"><a href="#8088-8086-CPU的特点" class="headerlink" title="8088/8086 CPU的特点"></a>8088/8086 CPU的特点</h2><ul>
+<li>采用并行流水线工作方式————通过设置指令预取队列实现（CPU内部结构）</li>
+<li>对内存空间实现分段管理————将内存分为4个段并设置地址段寄存器，以实现对1MB空间的寻址 （实模式存储器寻址）</li>
+<li>支持协处理器  （工作模式）</li>
+</ul>
+<h2 id="8080-8086-CPU的两种工作模式"><a href="#8080-8086-CPU的两种工作模式" class="headerlink" title="8080/8086 CPU的两种工作模式"></a>8080/8086 CPU的两种工作模式</h2><ul>
+<li>8088/8086可工作于两种模式下：<br>· 最小模式<br>· 最大模式</li>
+</ul>
+<h3 id="两种工作模式的选择方式："><a href="#两种工作模式的选择方式：" class="headerlink" title="两种工作模式的选择方式："></a>两种工作模式的选择方式：</h3><ul>
+<li>8088是工作在最小还是最大模式由MN/MX引线的状态决定。<br>· MN/MX=0————最大模式<br>· MN/MX=1————最小模式</li>
+</ul>
+<h1 id="8080的主要引线及内部结构"><a href="#8080的主要引线及内部结构" class="headerlink" title="8080的主要引线及内部结构"></a>8080的主要引线及内部结构</h1><h2 id="1-8080-CPU最小模式下的主要引脚信号"><a href="#1-8080-CPU最小模式下的主要引脚信号" class="headerlink" title="1.8080 CPU最小模式下的主要引脚信号"></a>1.8080 CPU最小模式下的主要引脚信号</h2><ul>
+<li>8080最小模式下的主要引脚信号————4组<br>· 完成一次访问内存或接口所需要的主要信号<br>· 与外部同步控制信号<br>· 中断请求和响应信号<br>· 总线保持和响应信号</li>
+</ul>
+<h3 id="微处理器读取一条指令的控制过程"><a href="#微处理器读取一条指令的控制过程" class="headerlink" title="微处理器读取一条指令的控制过程"></a>微处理器读取一条指令的控制过程</h3><ol>
+<li><p>发出读取数据所在的目标地址   （地址信号）<br>· 内存储器单元地址<br>· I/O接口地址</p>
+</li>
+<li><p>发出读控制信号 （控制信号）</p>
+</li>
+<li>送出传输的数据 （数据信号）</li>
+</ol>
+<h3 id="8088-CPU-最小模式下的主要引脚信号"><a href="#8088-CPU-最小模式下的主要引脚信号" class="headerlink" title="8088 CPU 最小模式下的主要引脚信号"></a>8088 CPU 最小模式下的主要引脚信号</h3><ul>
+<li><p>主要控制信号<br>· #WR ：写信号；<br>· #RD ：读信号；<br>· <strong>IO/#M</strong> ：为“0”表示访问内存，为“1”表示访问接口；<br>· #DEN ：低电平有效时，允许进行读/写操作；<br>· #DT/#R ：数据收发器的传送方向控制；<br>· ALE ： 地址锁存信号；<br>· RESET ： 复位信号。 </p>
+</li>
+<li><p>READY信号  </p>
+</li>
+</ul>
+<ul>
+<li><p>中断请求和响应信号<br>· INTR： 可屏蔽中断请求输入端<br>· NMI：非屏蔽中断请求输入端<br>· INTA：中断响应输出端  </p>
+</li>
+<li><p>总线保持信号<br>· HOLD：总线保持请求信号输入端。当CPU以外的其他设备要求占用总线时，通过该引脚向CPU发出请求。<br>· HLDA：总线保持响应信号输出端。CPU对HOLD信号的响应信号。</p>
+</li>
+</ul>
+<h3 id="8088和8086CPU引线功能比较"><a href="#8088和8086CPU引线功能比较" class="headerlink" title="8088和8086CPU引线功能比较"></a>8088和8086CPU引线功能比较</h3><ul>
+<li>数据总线宽度不同<br>· 8088的外部总线宽度是8位，8086为16位。</li>
+<li>访问存储器和输入输出控制信号含义不同<br>· 8088————IO/M=0表示访问内存；<br>· 8086————IO/M=1表示访问内存。<br>+其他部分引线功能的区别。</li>
+</ul>
+<h2 id="2-8088内部结构"><a href="#2-8088内部结构" class="headerlink" title="2. 8088内部结构"></a>2. 8088内部结构</h2><h3 id="执行单元（EU）"><a href="#执行单元（EU）" class="headerlink" title="执行单元（EU）"></a>执行单元（EU）</h3><ul>
+<li><p>构成：<br>· 运算器<br>· 8个通用寄存器<br>· 1个标志寄存器<br>· EU部分控制电路</p>
+</li>
+<li><p>功能<br>· 指令译码<br>· 指令执行<br>· 暂存中间运算结果<br>· 保存运算结果特征</p>
+</li>
+</ul>
+<h3 id="总线接口单元（BIU）"><a href="#总线接口单元（BIU）" class="headerlink" title="总线接口单元（BIU）"></a>总线接口单元（BIU）</h3><ul>
+<li>功能：<br>· 从内存中取指令到指令预存队列 （并行流水线工作的基础）<br>· 负责与内存或输入/输出接口之间的数据传送<br>· 在执行转移程序时，BIU使指令预取队列复位，从指定的新地址取指令，并立即传给执行单元执行。</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ol>
+<li>指令预取队列的存在使EU和BIU两个部分可同时进行工作（实现指令的并行执行）</li>
+<li>提高了CPU的效率</li>
+<li>降低了对存储器存取速度的要求</li>
+</ol>
+<h1 id="8080内部寄存器"><a href="#8080内部寄存器" class="headerlink" title="8080内部寄存器"></a>8080内部寄存器</h1><h2 id="内部寄存器的类型"><a href="#内部寄存器的类型" class="headerlink" title="内部寄存器的类型"></a>内部寄存器的类型</h2><ul>
+<li>含14个16位寄存器，按功能可分为三类<br>· 8个通用寄存器<br>· 4个段寄存器<br>· 2个控制寄存器</li>
+</ul>
+<h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><ul>
+<li>数据寄存器<blockquote>
+<p>· AX：累加器</p>
+<blockquote>
+<p>所有I/O指令都通过AX与接口传送信息，中间运算结果也多放于AX中；</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>· BX:基址寄存器</p>
+<blockquote>
+<p>在间接寻址中用于存放基地址；</p>
+</blockquote>
+<p>· CX：计数寄存器</p>
+<blockquote>
+<p>用于在循环或串操作指令中存放计数值；</p>
+</blockquote>
+<p>· DX：数据寄存器</p>
+<blockquote>
+<p>在间接寻址的I/O指令中存放I/O端口地址；在32位乘除法运算时，存放高16位数。</p>
+<hr>
+<ul>
+<li>8088/8086含4个16位数据寄存器，它们又可分为8个8位寄存器,即:<br>· AX————&gt;AH,AL<br>· BX————&gt;BH,BL<br>· CX————&gt;CH,CL<br>· DX————&gt;DH,DL</li>
+</ul>
+<hr>
+<ul>
+<li>地址指针寄存器<br>· SP : 堆栈指针寄存器</li>
+</ul>
+<p>其内容为栈顶的偏移地址</p>
+</blockquote>
+<p>· BP : 基址指针寄存器</p>
+<blockquote>
+<p>常用于在访问内存时存放内存单元的偏移地址。</p>
+<hr>
+</blockquote>
+</blockquote>
+<ul>
+<li>变址寄存器<br>· SI: 源变址寄存器<br>· DI:目标变址寄存器<br>· 变址寄存器在指令中常用于存放数据在内存中的地址。</li>
+</ul>
+<hr>
+<ul>
+<li>BX与BP在应用上的区别<br>· 作为通用寄存器，二者均可用于存放数据；<br>· 作为基址寄存器，用BX表示所寻找的数据在数据段；用BP则表示数据在堆栈段。</li>
+</ul>
+<h3 id="控制寄存器"><a href="#控制寄存器" class="headerlink" title="控制寄存器"></a>控制寄存器</h3><ul>
+<li><p>状态标志位<br>· CF（Carry Flag）  进位标志位。加(减)法运算时，若最高位有进(借)位则CF=1<br>· OF（Overflow Flag）  溢出标志位。当算术运算的结果超出了有符号数的可表达范围时，OF=1<br>· ZF（Zero Flag）  零标志位。当运算结果为零时ZF=1<br>· SF（Sign Flag）  符号标志位。当运算结果的最高位为1时，SF=1<br>· PF（Parity Flag） 奇偶标志位。运算结果的低8位中“1”的个数为偶数时PF=1<br>· AF（Auxiliary Carry Flag）  辅助进位标志位。加(减)操作中，若Bit3向Bit4有进位(借位)，AF=1</p>
+</li>
+<li><p>控制标志位<br>· TF（Trap Flag）  陷阱标志位，也叫跟踪标志位。TF=1时，使CPU处于单步执行指令的工作方式。<br>· IF（Interrupt Enable Flag）中断允许标志位。IF=1使CPU可以响应可屏蔽中断请求。<br>· DF（Direction Flag）方向标志位。在数据串操作时确定操作的方向。</p>
+</li>
+</ul>
+<h3 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h3><ul>
+<li>作用<br>· 用于存放相应逻辑段的段基地址</li>
+<li><p>8086/8088内存中逻辑段的类型<br>· 代码段————&gt;存放指令代码<br>· 数据段————&gt;存放操作的数据<br>· 附加段————&gt;存放操作的数据<br>· 堆栈段————&gt;存放暂时不用但需保存的数据。</p>
+</li>
+<li><p>CS ： 代码段寄存器，存放代码段的段基地址。</p>
+</li>
+<li>DS ： 数据段寄存器 ，存放数据段的段基地址。</li>
+<li>ES ： 附加段寄存器，存放数据段的段基地址。</li>
+<li>SS ： 堆栈段寄存器， 存放堆栈段的段基地址</li>
+</ul>
+<h1 id="实模式下的存储器寻址"><a href="#实模式下的存储器寻址" class="headerlink" title="实模式下的存储器寻址"></a>实模式下的存储器寻址</h1><h2 id="内存储器管理思想"><a href="#内存储器管理思想" class="headerlink" title="内存储器管理思想"></a>内存储器管理思想</h2><ul>
+<li>8088 CPU是16位体系结构的微处理器</li>
+<li>可以同时处理（产生）16位二进制码（直接管理64K个内存单元）</li>
+<li>8088 CPU需要管理1MB内存（需要能够产生1M个地址编码）<br>如何实现？<strong>内存分段管理方式</strong><h3 id="内存单元的编址"><a href="#内存单元的编址" class="headerlink" title="内存单元的编址"></a>内存单元的编址</h3></li>
+<li>内存每个单元的地址在逻辑上都由两部分组成：<br>· 段（基）地址 ：指示存储单元在整个内存空间中处于哪个区域（段）<br>· 段内地址（相对地址/偏移地址） ：指示存储单元在段中的相对位置（与段中第1个单元的距离）</li>
+</ul>
+<h3 id="存储器的编址"><a href="#存储器的编址" class="headerlink" title="存储器的编址"></a>存储器的编址</h3><ul>
+<li>段基地址：<br>· 决定存储单元在内存中的位置</li>
+<li>相对地址（偏移地址）：<br>· 该存储单元相对段内第一个单元的距离</li>
+<li>逻辑段的起始地址称为段首<br>· 每个逻辑段内的第一个单元（由偏移地址的定义得：段首的偏移地址=<strong>0</strong>）</li>
+<li>物理地址：<br>· 内存单元在整个内存空间中的惟一地址</li>
+</ul>
+<h2 id="实地址模式下的存储器地址变换"><a href="#实地址模式下的存储器地址变换" class="headerlink" title="实地址模式下的存储器地址变换"></a>实地址模式下的存储器地址变换</h2><ul>
+<li>内存物理地址由段基地址和偏移地址组成<br><strong>物理地址=段基地址×16+偏移地址</strong></li>
+</ul>
+<h2 id="逻辑段与逻辑地址"><a href="#逻辑段与逻辑地址" class="headerlink" title="逻辑段与逻辑地址"></a>逻辑段与逻辑地址</h2><ul>
+<li><strong>内存的分段是逻辑分段，不是物理段</strong>。各个逻辑段在地址上可以不相连、可以部分重合，也可以完全重合。</li>
+<li>每个内存单元具有惟一物理地址，但可能具有多个逻辑地址。</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>一个内存单元可以同时处于两个逻辑段</li>
+<li>一个内存单元可以在不同的时刻属于相同（或不同）类型的段</li>
+<li>一个内存单元在同一时刻可以属于不同类型的段</li>
+</ol>
+<h2 id="堆栈及堆栈段的使用"><a href="#堆栈及堆栈段的使用" class="headerlink" title="堆栈及堆栈段的使用"></a>堆栈及堆栈段的使用</h2><ul>
+<li>堆栈：<br>· 内存中一个特殊区域，用于存放暂时不用或需要保护的数据。<br>· 常用于响应中断或子程序调用。</li>
+</ul>
+<h1 id="8080系统总线"><a href="#8080系统总线" class="headerlink" title="8080系统总线"></a>8080系统总线</h1><h2 id="总线时序"><a href="#总线时序" class="headerlink" title="总线时序"></a>总线时序</h2><ul>
+<li>CPU工作时序：<br>· CPU各引脚信号在时间上的关系</li>
+<li>总线周期：<br>·CPU完成一次访问内存（或接口）操作所需要的时间。<br>· 一个总线周期至少包括4个时钟周期。</li>
+</ul>
+<h2 id="总线的概念"><a href="#总线的概念" class="headerlink" title="总线的概念"></a>总线的概念</h2><ul>
+<li><p>总线：<br>· 是一组导线和相关的控制、驱动电路的集合。是计算机系统各部件之间传输地址、数据和控制信息的通道。<br>· 地址总线（AB）<br>· 数据总线（DB）<br>· 控制总线（CB）</p>
+</li>
+<li><p>总线按层次结构分类<br>· CPU总线<br>· 系统总线<br>· 外部总线</p>
+</li>
+</ul>
+<h2 id="总线结构"><a href="#总线结构" class="headerlink" title="总线结构"></a>总线结构</h2><ul>
+<li>单总线结构</li>
+<li>双总线结构<br>· 面向CPU的双总线结构<br>· 面向主存的双总线结构</li>
+<li>多总线结构</li>
+</ul>
+<h2 id="面向CPU的双总线结构"><a href="#面向CPU的双总线结构" class="headerlink" title="面向CPU的双总线结构"></a>面向CPU的双总线结构</h2><p>存储器与I/O接口间无直接通道<br>在单总线结构基础上增加一条CPU到存储器的高速总线</p>
+<h2 id="总线的基本功能"><a href="#总线的基本功能" class="headerlink" title="总线的基本功能"></a>总线的基本功能</h2><ul>
+<li>数据传送</li>
+<li>仲裁控制</li>
+<li>出错处理</li>
+<li>总线驱动</li>
+</ul>
+<h2 id="总线的主要性能指标"><a href="#总线的主要性能指标" class="headerlink" title="总线的主要性能指标"></a>总线的主要性能指标</h2><ul>
+<li><p><strong>总线带宽（B/S）：</strong><br>· 单位时间内总线上可传送的数据量<br>· 总线带宽=位宽*工作频率</p>
+</li>
+<li><p>总线位宽（bit）：<br>· 能同时传送的数据位数</p>
+</li>
+<li><p>总线的工作频率（MHz）<br>· 总线带宽=（位宽/8）*（工作频率/每个存取周期的时钟数）</p>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+  
+
+    
+       
+  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/15/3-15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EiffelZero">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="EiffelZero's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/03/15/3-15/" class="post-title-link" itemprop="url">3-15</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-15 14:26:58 / 修改时间：20:43:06" itemprop="dateCreated datePublished" datetime="2020-03-15T14:26:58+08:00">2020-03-15</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/15/3-15/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/15/3-15/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[蓝桥杯2017初赛]Excel地址</p>
+<blockquote>
+<p>题目描述<br>Excel单元格的地址表示很有趣，它使用字母来表示列号。<br>比如，A表示第1列，B表示第2列，Z表示第26列，AA表示第27列，AB表示第28列，BA表示第53列，….<br>当然Excel的最大列号是有限度的，所以转换起来不难。<br>如果我们想把这种表示法一般化，可以把很大的数字转换为很长的字母序列呢？<br>本题目既是要求对输入的数字, 输出其对应的Excel地址表示方式。</p>
+<p>输入<br>输入存在多组测试数据，对于每组测试数据输入一行包含一个整数<br>输入的整数范围[1,2147483647]</p>
+<p>输出<br>对于每组测试数据：输出一行表示答案</p>
+<p>样例输入<br>26<br>2054</p>
+<p>样例输出<br>Z<br>BZZ</p>
+</blockquote>
+<p>思路：进制转换</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll a;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a);</span><br><span class="line">	<span class="built_in">stack</span> &lt;<span class="keyword">int</span>&gt; sta;</span><br><span class="line">	<span class="keyword">while</span>(a)&#123;</span><br><span class="line">		<span class="keyword">int</span> tmp=a%<span class="number">26</span>;</span><br><span class="line">		<span class="keyword">if</span>(tmp==<span class="number">0</span>)&#123;</span><br><span class="line">			tmp=<span class="number">26</span>;</span><br><span class="line">			a--;</span><br><span class="line">		&#125;</span><br><span class="line">		sta.push(tmp);</span><br><span class="line">		a/=<span class="number">26</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(sta.size())&#123;</span><br><span class="line">		<span class="keyword">int</span> tmp=sta.top();</span><br><span class="line">		sta.pop();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%c"</span>,<span class="string">'@'</span>+tmp);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>[蓝桥杯2017初赛]算式900</p>
+<blockquote>
+<p>题目描述<br>小明的作业本上有道思考题：算式： (□□□□-□□□□)<em>□□=900<br>其中的小方块代表0~9的数字，这10个方块刚好包含了0~9中的所有数字。<br>注意：0不能作为某个数字的首位。<br>小明经过几天的努力，终于做出了答案！如下：(5012-4987)</em>36=900<br>用计算机搜索后，发现还有另外一个解，本题的任务就是：请你算出这另外的一个解。</p>
+<p>输出<br>输出格式需要与示例严格一致；<br>括号及运算符号不要用中文输入法；<br>整个算式中不能包含空格。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	do&#123;</span></span><br><span class="line"><span class="comment">		</span></span><br><span class="line"><span class="comment">		if(a[0]==0||a[4]==0||a[8]==0)&#123;</span></span><br><span class="line"><span class="comment">			continue;</span></span><br><span class="line"><span class="comment">		&#125;</span></span><br><span class="line"><span class="comment">		int aa=a[0]*1000+a[1]*100+a[2]*10+a[3];</span></span><br><span class="line"><span class="comment">		int bb=a[4]*1000+a[5]*100+a[6]*10+a[7];</span></span><br><span class="line"><span class="comment">		int cc=a[8]*10+a[9];</span></span><br><span class="line"><span class="comment">		if((aa-bb)*cc==900)&#123;</span></span><br><span class="line"><span class="comment">			printf("(%d-%d)*%d\n",aa,bb,cc);</span></span><br><span class="line"><span class="comment">		&#125;</span></span><br><span class="line"><span class="comment">	&#125;while(next_permutation(a,a+10));*/</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; <span class="string">"(6048-5973)*12=900"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>[蓝桥杯2017初赛]k倍区间</p>
+<blockquote>
+<p>题目描述<br>给定一个长度为N的数列，A1, A2, … AN。<br>如果其中一段连续的子序列Ai, Ai+1, … Aj(i &lt;= j)之和是K的倍数，我们就称这个区间[i, j]是K倍区间。<br>你能求出数列中总共有多少个K倍区间吗？ </p>
+<p>输入<br>第一行包含两个整数N和K。(1 &lt;= N, K &lt;= 100000)<br>以下N行每行包含一个整数Ai。(1 &lt;= Ai &lt;= 100000)  </p>
+<p>输出<br>输出一个整数，代表K倍区间的数目。</p>
+<p>样例输入<br>5 2<br>1<br>2<br>3<br>4<br>5</p>
+<p>样例输出<br>6</p>
+</blockquote>
+<p>借鉴：<a href="https://blog.csdn.net/w_x_s_h_h/article/details/79375081" target="_blank" rel="noopener">https://blog.csdn.net/w_x_s_h_h/article/details/79375081</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">ll sum=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">ll a[MAX_N];</span><br><span class="line">ll ans[MAX_N];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ll n,k;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	a[<span class="number">1</span>]%=k;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		a[i]=(a[i]+a[i<span class="number">-1</span>])%k;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		sum+=(ans[a[i]]++);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,sum+ans[<span class="number">0</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+  
+
+    
+       
+  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/14/3-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EiffelZero">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="EiffelZero's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/03/14/3-14/" class="post-title-link" itemprop="url">3-14</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-14 20:36:10 / 修改时间：21:37:13" itemprop="dateCreated datePublished" datetime="2020-03-14T20:36:10+08:00">2020-03-14</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/14/3-14/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/14/3-14/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[蓝桥杯2017初赛]青蛙跳杯子<br>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/11/27/Codeforces-Round-570-Div-3/#more" rel="contents">
+              <a class="btn" href="/2020/03/14/3-14/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -398,7 +1492,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/11/26/Codeforces-Round-590-Div-3/">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/13/3-13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="EiffelZero">
@@ -412,7 +1506,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/11/26/Codeforces-Round-590-Div-3/" class="post-title-link" itemprop="url">Codeforces Round #590 (Div. 3)</a>
+            <a href="/2020/03/13/3-13/" class="post-title-link" itemprop="url">3-13</a>
           
         </h1>
 
@@ -427,7 +1521,7 @@
                 
               
 
-              <time title="创建时间：2019-11-26 21:26:36 / 修改时间：21:37:48" itemprop="dateCreated datePublished" datetime="2019-11-26T21:26:36+08:00">2019-11-26</time>
+              <time title="创建时间：2020-03-13 19:27:28 / 修改时间：23:36:18" itemprop="dateCreated datePublished" datetime="2020-03-13T19:27:28+08:00">2020-03-13</time>
             </span>
           
             
@@ -446,7 +1540,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/26/Codeforces-Round-590-Div-3/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/26/Codeforces-Round-590-Div-3/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2020/03/13/3-13/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/13/3-13/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -460,11 +1554,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://codeforces.com/contest/1234" target="_blank" rel="noopener">Codeforces Round #590 (Div. 3)</a><br>
+          <p> [蓝桥杯2017初赛]正则问题<br>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/11/26/Codeforces-Round-590-Div-3/#more" rel="contents">
+              <a class="btn" href="/2020/03/13/3-13/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -496,7 +1590,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/11/24/Codeforces-Round-598-Div-3/">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/13/3-12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="EiffelZero">
@@ -510,7 +1604,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/11/24/Codeforces-Round-598-Div-3/" class="post-title-link" itemprop="url">Codeforces Round #598 (Div. 3)</a>
+            <a href="/2020/03/13/3-12/" class="post-title-link" itemprop="url">3-12</a>
           
         </h1>
 
@@ -525,7 +1619,7 @@
                 
               
 
-              <time title="创建时间：2019-11-24 20:04:35 / 修改时间：20:15:55" itemprop="dateCreated datePublished" datetime="2019-11-24T20:04:35+08:00">2019-11-24</time>
+              <time title="创建时间：2020-03-13 01:41:46 / 修改时间：02:07:08" itemprop="dateCreated datePublished" datetime="2020-03-13T01:41:46+08:00">2020-03-13</time>
             </span>
           
             
@@ -544,7 +1638,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/24/Codeforces-Round-598-Div-3/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/24/Codeforces-Round-598-Div-3/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2020/03/13/3-12/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/13/3-12/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -558,11 +1652,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://codeforces.com/contest/1256" target="_blank" rel="noopener">Codeforces Round #598 (Div. 3)</a><br>
+          <p>[蓝桥杯2017初赛]跳蚱蜢<br>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/11/24/Codeforces-Round-598-Div-3/#more" rel="contents">
+              <a class="btn" href="/2020/03/13/3-12/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -594,7 +1688,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/10/28/AC自动机/">
+    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2020/03/12/3-11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="EiffelZero">
@@ -608,7 +1702,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/10/28/AC自动机/" class="post-title-link" itemprop="url">AC自动机</a>
+            <a href="/2020/03/12/3-11/" class="post-title-link" itemprop="url">3-11</a>
           
         </h1>
 
@@ -623,325 +1717,7 @@
                 
               
 
-              <time title="创建时间：2019-10-28 20:22:43" itemprop="dateCreated datePublished" datetime="2019-10-28T20:22:43+08:00">2019-10-28</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-07 16:46:02" itemprop="dateModified" datetime="2019-11-07T16:46:02+08:00">2019-11-07</time>
-              </span>
-            
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/10/28/AC自动机/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/28/AC自动机/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Trie+Kmp=AC自动机<br>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/28/AC自动机/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-  
-
-    
-       
-  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/10/24/逆元/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="EiffelZero">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="EiffelZero's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/24/逆元/" class="post-title-link" itemprop="url">逆元</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-24 22:13:51" itemprop="dateCreated datePublished" datetime="2019-10-24T22:13:51+08:00">2019-10-24</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-07 16:41:52" itemprop="dateModified" datetime="2019-11-07T16:41:52+08:00">2019-11-07</time>
-              </span>
-            
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/10/24/逆元/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/24/逆元/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>逆元素是指一个可以取消另一给定元素运算的元素，在数学里，逆元素广义化了加法中的加法逆元和乘法中的倒数<br>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/24/逆元/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-  
-
-    
-       
-  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/10/24/Lucas定理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="EiffelZero">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="EiffelZero's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/24/Lucas定理/" class="post-title-link" itemprop="url">Lucas定理</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-24 21:23:03" itemprop="dateCreated datePublished" datetime="2019-10-24T21:23:03+08:00">2019-10-24</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 20:25:00" itemprop="dateModified" datetime="2019-11-24T20:25:00+08:00">2019-11-24</time>
-              </span>
-            
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/10/24/Lucas定理/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/24/Lucas定理/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Lucas定理一句话说就是<br>Lucas(m,n,p) = C$\tbinom{m/p}{n/p}$ * Lucas(m%p,n%p,p)</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/24/Lucas定理/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-  
-
-    
-       
-  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/10/15/践踏/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="EiffelZero">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="EiffelZero's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/15/践踏/" class="post-title-link" itemprop="url">践踏</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-15 20:53:19 / 修改时间：21:28:31" itemprop="dateCreated datePublished" datetime="2019-10-15T20:53:19+08:00">2019-10-15</time>
+              <time title="创建时间：2020-03-12 00:50:12 / 修改时间：01:16:46" itemprop="dateCreated datePublished" datetime="2020-03-12T00:50:12+08:00">2020-03-12</time>
             </span>
           
             
@@ -960,7 +1736,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/10/15/践踏/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/15/践踏/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2020/03/12/3-11/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/12/3-11/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -974,313 +1750,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>题意：<br>1操作 加一条线段<br>2操作 删一条线段<br>3查询 有多少条线段满足x+kt（t是整数）<br>
+          <p>[蓝桥杯2017初赛]购物单<br>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/10/15/践踏/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-  
-
-    
-       
-  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/10/15/VVQ与线段/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="EiffelZero">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="EiffelZero's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/15/VVQ与线段/" class="post-title-link" itemprop="url">VVQ与线段</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-15 20:52:59" itemprop="dateCreated datePublished" datetime="2019-10-15T20:52:59+08:00">2019-10-15</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-17 20:40:01" itemprop="dateModified" datetime="2019-10-17T20:40:01+08:00">2019-10-17</time>
-              </span>
-            
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/10/15/VVQ与线段/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/15/VVQ与线段/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>题意：求任意两条线段的异或最大值。<br>定义线段的异或值为它们并的长度减他们交的长度<br>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/15/VVQ与线段/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-  
-
-    
-       
-  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/10/15/统计颜色/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="EiffelZero">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="EiffelZero's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/15/统计颜色/" class="post-title-link" itemprop="url">统计颜色</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-15 20:52:42 / 修改时间：21:42:26" itemprop="dateCreated datePublished" datetime="2019-10-15T20:52:42+08:00">2019-10-15</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/10/15/统计颜色/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/15/统计颜色/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>题意：<br>n个桶按顺序排列，我们用1~n给桶标号。有两种操作：<br>1 l r c 区间[l,r]中的每个桶中都放入一个颜色为c的球 (1≤l,r ≤n,l≤r,0≤c≤60)<br>2 l r   查询区间[l,r]的桶中有多少种不同颜色的球     (1≤l,r ≤n,l≤r)<br>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/15/统计颜色/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-  
-
-    
-       
-  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ihopezero.github.io/2019/10/15/Sum/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="EiffelZero">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="EiffelZero's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/15/Sum/" class="post-title-link" itemprop="url">Sum</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-15 20:52:22 / 修改时间：21:53:42" itemprop="dateCreated datePublished" datetime="2019-10-15T20:52:22+08:00">2019-10-15</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/10/15/Sum/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/15/Sum/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>题意：<br>考虑维护一个这样的问题：<br>（1） 给出一个数组A，标号为1~n<br>（2） 修改数组中的一个位置。<br>（3） 询问区间[l,r]中所有子集的位运算and之和mod($10^9$+7)。<br>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/15/Sum/#more" rel="contents">
+              <a class="btn" href="/2020/03/12/3-11/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1311,7 +1785,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1357,7 +1831,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1370,7 +1844,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -1418,7 +1892,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-EiffelZero"></i>
   </span>
@@ -1582,8 +2056,6 @@ window.addEventListener('pjax:success', () => {
       
     
       
-        
-      
     
       
     
@@ -1594,56 +2066,6 @@ window.addEventListener('pjax:success', () => {
       
     
       
-    
-  
-    
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
     
   
 
