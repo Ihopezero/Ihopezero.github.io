@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.8.0">
+<meta name="generator" content="Hexo 3.9.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -219,7 +219,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">30</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -241,7 +241,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">57</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">54</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -262,7 +262,9 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
@@ -300,7 +302,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="EiffelZero">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658">
     </span>
 
@@ -355,6 +357,27 @@
   </span>
   
   
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>6.4k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>11 分钟</span>
+            </span>
+          
 
         </div>
       </header>
@@ -391,7 +414,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N=<span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n=<span class="number">1000000</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> vis[MAX_N];</span><br><span class="line"><span class="keyword">int</span> prime[MAX_N];</span><br><span class="line"><span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Prime</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i]) prime[cnt++]=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cnt&amp;&amp;i*prime[j]&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            vis[i*prime[j]]=i;</span><br><span class="line">            <span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="number">210</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">/*Prime();</span></span><br><span class="line"><span class="comment">	int res=1;</span></span><br><span class="line"><span class="comment">	for(int i=0;i&lt;1000&amp;&amp;res&lt;10;i++)&#123;</span></span><br><span class="line"><span class="comment">		int temp=prime[i];</span></span><br><span class="line"><span class="comment">		for(int j=1;j&lt;=1000&amp;&amp;res&lt;10;j++)&#123;</span></span><br><span class="line"><span class="comment">			 res=1;</span></span><br><span class="line"><span class="comment">			int tmp=temp+j;</span></span><br><span class="line"><span class="comment">			while(!vis[tmp])&#123;</span></span><br><span class="line"><span class="comment">				res++;</span></span><br><span class="line"><span class="comment">				tmp=tmp+j;</span></span><br><span class="line"><span class="comment">				//cout&lt;&lt;tmp&lt;&lt;" "&lt;&lt;j&lt;&lt;endl;</span></span><br><span class="line"><span class="comment">				if(res&gt;=10)&#123;</span></span><br><span class="line"><span class="comment">					printf("%d %d",temp,j);</span></span><br><span class="line"><span class="comment">					break;</span></span><br><span class="line"><span class="comment">				&#125;</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">		&#125;</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	 <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>[蓝桥杯2018初赛]乘积尾零</p>
 <blockquote>
-<p>题目描述<br>如下的10行数据，每行有10个整数，请你求出它们的乘积的末尾有多少个零？<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">5650 </span><span class="number">4542</span> <span class="number">3554</span> <span class="number">473</span> <span class="number">946</span> <span class="number">4114</span> <span class="number">3871</span> <span class="number">9073</span> <span class="number">90</span> <span class="number">4329</span> </span><br><span class="line"><span class="symbol">2758 </span><span class="number">7949</span> <span class="number">6113</span> <span class="number">5659</span> <span class="number">5245</span> <span class="number">7432</span> <span class="number">3051</span> <span class="number">4434</span> <span class="number">6704</span> <span class="number">3594</span> </span><br><span class="line"><span class="symbol">9937 </span><span class="number">1173</span> <span class="number">6866</span> <span class="number">3397</span> <span class="number">4759</span> <span class="number">7557</span> <span class="number">3070</span> <span class="number">2287</span> <span class="number">1453</span> <span class="number">9899</span> </span><br><span class="line"><span class="symbol">1486 </span><span class="number">5722</span> <span class="number">3135</span> <span class="number">1170</span> <span class="number">4014</span> <span class="number">5510</span> <span class="number">5120</span> <span class="number">729</span> <span class="number">2880</span> <span class="number">9019</span> </span><br><span class="line"><span class="symbol">2049 </span><span class="number">698</span> <span class="number">4582</span> <span class="number">4346</span> <span class="number">4427</span> <span class="number">646</span> <span class="number">9742</span> <span class="number">7340</span> <span class="number">1230</span> <span class="number">7683</span> </span><br><span class="line"><span class="symbol">5693 </span><span class="number">7015</span> <span class="number">6887</span> <span class="number">7381</span> <span class="number">4172</span> <span class="number">4341</span> <span class="number">2909</span> <span class="number">2027</span> <span class="number">7355</span> <span class="number">5649</span> </span><br><span class="line"><span class="symbol">6701 </span><span class="number">6645</span> <span class="number">1671</span> <span class="number">5978</span> <span class="number">2704</span> <span class="number">9926</span> <span class="number">295</span> <span class="number">3125</span> <span class="number">3878</span> <span class="number">6785</span> </span><br><span class="line"><span class="symbol">2066 </span><span class="number">4247</span> <span class="number">4800</span> <span class="number">1578</span> <span class="number">6652</span> <span class="number">4616</span> <span class="number">1113</span> <span class="number">6205</span> <span class="number">3264</span> <span class="number">2915</span> </span><br><span class="line"><span class="symbol">3966 </span><span class="number">5291</span> <span class="number">2904</span> <span class="number">1285</span> <span class="number">2193</span> <span class="number">1428</span> <span class="number">2265</span> <span class="number">8730</span> <span class="number">9436</span> <span class="number">7074</span> </span><br><span class="line"><span class="symbol">689 </span><span class="number">5510</span> <span class="number">8243</span> <span class="number">6114</span> <span class="number">337</span> <span class="number">4096</span> <span class="number">8199</span> <span class="number">7313</span> <span class="number">3685</span> <span class="number">211</span></span><br></pre></td></tr></table></figure></p>
+<p>题目描述<br>如下的10行数据，每行有10个整数，请你求出它们的乘积的末尾有多少个零？<br><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5650</span> <span class="number">4542</span> <span class="number">3554</span> <span class="number">473</span> <span class="number">946</span> <span class="number">4114</span> <span class="number">3871</span> <span class="number">9073</span> <span class="number">90</span> <span class="number">4329</span> </span><br><span class="line"><span class="number">2758</span> <span class="number">7949</span> <span class="number">6113</span> <span class="number">5659</span> <span class="number">5245</span> <span class="number">7432</span> <span class="number">3051</span> <span class="number">4434</span> <span class="number">6704</span> <span class="number">3594</span> </span><br><span class="line"><span class="number">9937</span> <span class="number">1173</span> <span class="number">6866</span> <span class="number">3397</span> <span class="number">4759</span> <span class="number">7557</span> <span class="number">3070</span> <span class="number">2287</span> <span class="number">1453</span> <span class="number">9899</span> </span><br><span class="line"><span class="number">1486</span> <span class="number">5722</span> <span class="number">3135</span> <span class="number">1170</span> <span class="number">4014</span> <span class="number">5510</span> <span class="number">5120</span> <span class="number">729</span> <span class="number">2880</span> <span class="number">9019</span> </span><br><span class="line"><span class="number">2049</span> <span class="number">698</span> <span class="number">4582</span> <span class="number">4346</span> <span class="number">4427</span> <span class="number">646</span> <span class="number">9742</span> <span class="number">7340</span> <span class="number">1230</span> <span class="number">7683</span> </span><br><span class="line"><span class="number">5693</span> <span class="number">7015</span> <span class="number">6887</span> <span class="number">7381</span> <span class="number">4172</span> <span class="number">4341</span> <span class="number">2909</span> <span class="number">2027</span> <span class="number">7355</span> <span class="number">5649</span> </span><br><span class="line"><span class="number">6701</span> <span class="number">6645</span> <span class="number">1671</span> <span class="number">5978</span> <span class="number">2704</span> <span class="number">9926</span> <span class="number">295</span> <span class="number">3125</span> <span class="number">3878</span> <span class="number">6785</span> </span><br><span class="line"><span class="number">2066</span> <span class="number">4247</span> <span class="number">4800</span> <span class="number">1578</span> <span class="number">6652</span> <span class="number">4616</span> <span class="number">1113</span> <span class="number">6205</span> <span class="number">3264</span> <span class="number">2915</span> </span><br><span class="line"><span class="number">3966</span> <span class="number">5291</span> <span class="number">2904</span> <span class="number">1285</span> <span class="number">2193</span> <span class="number">1428</span> <span class="number">2265</span> <span class="number">8730</span> <span class="number">9436</span> <span class="number">7074</span> </span><br><span class="line"><span class="number">689</span> <span class="number">5510</span> <span class="number">8243</span> <span class="number">6114</span> <span class="number">337</span> <span class="number">4096</span> <span class="number">8199</span> <span class="number">7313</span> <span class="number">3685</span> <span class="number">211</span></span><br></pre></td></tr></table></figure></p>
 <p>输出<br>输出一个整数表示答案</p>
 </blockquote>
 <p>思路：0会由2和5共同构成，将每个数拆分成由2 和 5 组成的数，统计2 和5 的个数，然后取2 和 5 个数的最小值即为尾零的个数，实际上5的个数会比2的个数小</p>
@@ -504,7 +527,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" src="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658" alt="EiffelZero">
+    <img class="site-author-image" itemprop="image"
+      src="http://hbimg.b0.upaiyun.com/261caf6a4088dcd681c798fdf1a752995bcd19c51c94b-l2ECBv_fw658"
+      alt="EiffelZero">
   <p class="site-author-name" itemprop="name">EiffelZero</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -514,7 +539,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -527,7 +552,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -580,6 +605,20 @@
     <i class="fa fa-EiffelZero"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">EiffelZero</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">136k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">3:47</span>
 </div>
 
         
@@ -626,7 +665,7 @@
   
     
   
-  <script color="0,0,0" opacity="0.5" zindex="-1" count="150" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
